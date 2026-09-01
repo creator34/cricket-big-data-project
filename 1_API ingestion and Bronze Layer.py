@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
 # DBTITLE 1,Import the required libraries
 #we do not need to define a session/context as databricks is built on top of session
 import requests
@@ -55,7 +59,6 @@ bronze_df=(
     .withColumn("ingestion_time",current_timestamp())
     )
 
-display(bronze_df)
 
 # COMMAND ----------
 
