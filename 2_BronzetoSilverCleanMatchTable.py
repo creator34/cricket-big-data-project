@@ -5,7 +5,9 @@ import requests
 import json
 from pyspark.sql.functions import *
 from pyspark.sql.types import *  
+from pyspark.sql import SparkSession
 
+spark=SparkSession.builder.appName('SilverLayer').config("spark.sql.shuffle.partitions", "100").getOrCreate()
 # COMMAND ----------
 
 # DBTITLE 1,read the bronze table

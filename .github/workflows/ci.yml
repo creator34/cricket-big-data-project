@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Bronze
+        run: python 1_APIIngestionAndBronzeLayer.py
+
+      - name: Run Silver
+        run: python 2_BronzetoSilverCleanMatchTable.py
+
+      - name: Run Gold
+        run: python 3_GoldLayerAnalyticsPrep.py
