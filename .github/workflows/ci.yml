@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  test-pyspark:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,20 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Run Bronze
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
         run: python 1_APIIngestionAndBronzeLayer.py
 
       - name: Run Silver
