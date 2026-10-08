@@ -5,7 +5,9 @@
 # ///
 # DBTITLE 1,importing libraries
 from pyspark.sql.functions import *
+from pyspark.sql import SparkSession
 
+spark=SparkSession.builder.appName('GoldLayer').config("spark.sql.shuffle.partitions", "100").getOrCreate()
 
 # COMMAND ----------
 

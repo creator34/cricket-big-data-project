@@ -9,6 +9,10 @@ import requests
 import json
 from pyspark.sql.functions import *
 from pyspark.sql.types import *  
+import os
+from pyspark.sql import SparkSession
+
+spark=SparkSession.builder.appName('BronzeLayer').config("spark.sql.shuffle.partitions", "100").getOrCreate()
 
 # COMMAND ----------
 
@@ -21,7 +25,7 @@ base_path="/Volumes/workspace/default/cricket_api_project"
 # COMMAND ----------
 
 # DBTITLE 1,Calling cricket API
-API_KEY="2a8f9667-b1e1-446b-92ea-75a7ece5b170"
+API_KEY=os.getenv("API_KEY")
 api_url=f"https://api.cricapi.com/v1/currentMatches?apikey={API_KEY}&offset=0"
 
 response=requests.get(api_url)
